@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Github Repo Form</title>
+</head>
+<body>
+  <h1>Github Repo Form</h1>
+  
+  <form id="githubForm">
+    <label for="repoName">Repository Name:</label>
+    <input type="text" id="repoName" name="repoName" required><br><br>
+    
+    <label for="repoURL">Repository URL:</label>
+    <input type="text" id="repoURL" name="repoURL" required><br><br>
+    
+    <label for="apiKey">API Key:</label>
+    <input type="text" id="apiKey" name="apiKey" required><br><br>
+    
+    <button type="submit">Submit</button>
+  </form>
+  
+  <script>
+    document.getElementById("githubForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      // Get the input values
+      var repoName = document.getElementById("repoName").value;
+      var repoURL = document.getElementById("repoURL").value;
+      var apiKey = document.getElementById("apiKey").value;
+      
+      // Perform any further processing or API calls here
+      
+      // Display a success message
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>
