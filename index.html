@@ -1,32 +1,95 @@
-document.getElementById("myForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Frontend Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
-  const repoName = document.getElementById("repoName").value;
-  const repoURL = document.getElementById("repoURL").value;
-  const apiKey = document.getElementById("apiKey").value;
+    h1 {
+      text-align: center;
+    }
 
-  const data = {
-    repoName: repoName,
-    repoURL: repoURL,
-    apiKey: apiKey
-  };
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
 
-  fetch("http://ec2-54-173-4-247.compute-1.amazonaws.com:3000/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    console.log("Response from backend:", result);
-    // You can perform additional actions with the response data if needed
-  })
-  .catch(error => {
-    console.error(error);
-  });
-});
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
 
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Wagwan</h1>
+  <form id="myForm">
+    <label for="repoName">Repository Name:</label>
+    <input type="text" id="repoName" name="repoName"><br><br>
+    <label for="repoURL">Repository URL:</label>
+    <input type="text" id="repoURL" name="repoURL"><br><br>
+    <label for="apiKey">API Key:</label>
+    <input type="text" id="apiKey" name="apiKey"><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const repoName = document.getElementById("repoName").value;
+      const repoURL = document.getElementById("repoURL").value;
+      const apiKey = document.getElementById("apiKey").value;
+
+      const data = {
+        repoName: repoName,
+        repoURL: repoURL,
+        apiKey: apiKey
+      };
+
+      fetch("http://ec2-54-173-4-247.compute-1.amazonaws.com:3000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        // Handle the response from the backend
+        console.log(result);
+      })
+      .catch(error => {
+        // Handle any errors that occur during the request
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
 
