@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Github Repo Form</title>
+  <title>Frontend Form</title>
 </head>
 <body>
-  <h1>Github Repo Form</h1>
-  
-  <form id="githubForm">
+  <h1>Frontend Form</h1>
+  <form id="myForm">
     <label for="repoName">Repository Name:</label>
-    <input type="text" id="repoName" name="repoName" required><br><br>
-    
+    <input type="text" id="repoName" name="repoName"><br><br>
     <label for="repoURL">Repository URL:</label>
-    <input type="text" id="repoURL" name="repoURL" required><br><br>
-    
+    <input type="text" id="repoURL" name="repoURL"><br><br>
     <label for="apiKey">API Key:</label>
-    <input type="text" id="apiKey" name="apiKey" required><br><br>
-    
+    <input type="text" id="apiKey" name="apiKey"><br><br>
     <button type="submit">Submit</button>
   </form>
-  
+
   <script>
-    document.getElementById("githubForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent form submission
-      
-      // Get the input values
-      var repoName = document.getElementById("repoName").value;
-      var repoURL = document.getElementById("repoURL").value;
-      var apiKey = document.getElementById("apiKey").value;
-      
-      // Perform any further processing or API calls here
-      
-      // Display a success message
-      alert("Form submitted successfully!");
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const repoName = document.getElementById("repoName").value;
+      const repoURL = document.getElementById("repoURL").value;
+      const apiKey = document.getElementById("apiKey").value;
+
+      const data = {
+        repoName: repoName,
+        repoURL: repoURL,
+        apiKey: apiKey
+      };
+
+      fetch("http://YOUR_EC2_INSTANCE_IP_OR_DOMAIN/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        // Handle the response from the backend
+        console.log(result);
+      })
+      .catch(error => {
+        // Handle any errors that occur during the request
+        console.error(error);
+      });
     });
   </script>
 </body>
 </html>
+
