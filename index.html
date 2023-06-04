@@ -47,6 +47,7 @@
   </style>
 </head>
 <body>
+  <body>
   <h1>Wagwan</h1>
   <form id="myForm">
     <label for="repoName">Repository Name:</label>
@@ -59,27 +60,6 @@
   </form>
 
   <script>
-    
-const express = require('express');
-const httpProxy = require('http-proxy');
-
-const app = express();
-const proxy = httpProxy.createProxyServer();
-
-// Forward the request to the backend server
-app.all('/submit', (req, res) => {
-  proxy.web(req, res, {
-    target: 'http://ec2-13-58-73-19.us-east-2.compute.amazonaws.com:3000',
-    secure: false, // Disable SSL verification if needed
-    changeOrigin: true, // Modify the "Host" header to the target URL
-  });
-});
-
-// Start the frontend server
-app.listen(80, () => {
-  console.log('Frontend server is running on port 80');
-});
-
     document.getElementById("myForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -92,7 +72,7 @@ app.listen(80, () => {
         repoURL: repoURL,
         apiKey: apiKey
       };
-      fetch("/submit", {
+      fetch("http://ec2-18-119-129-117.us-east-2.compute.amazonaws.com:3000/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -111,5 +91,6 @@ app.listen(80, () => {
     });
   </script>
 </body>
+
 </html>
 
